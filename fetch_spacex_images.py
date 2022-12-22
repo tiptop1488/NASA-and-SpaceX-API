@@ -1,4 +1,5 @@
 import requests
+import additional_scripts
 
 
 def fetch_spacex_last_launch():
@@ -9,4 +10,4 @@ def fetch_spacex_last_launch():
     image_links = description['links']['flickr']['original']
     image_links = enumerate(image_links)
     for i in image_links:
-        get_image(i[1], f"spaceX_{i[0]}.jpeg")
+        additional_scripts.get_image(i[1], f"spaceX_{i[0]}.jpeg")
