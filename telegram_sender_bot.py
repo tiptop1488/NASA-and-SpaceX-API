@@ -2,7 +2,6 @@ import telegram
 import os
 from dotenv import load_dotenv
 import pathlib
-import time
 import random
 import argparse
 
@@ -16,14 +15,16 @@ if __name__ == '__main__':
     for currentFile in currentDirectory.iterdir():
         name_images.append(currentFile)
     parser = argparse.ArgumentParser()
-    parser.add_argument('--time_sleep')
+    parser.add_argument('--name_photo')
     args = parser.parse_args()
-    time_sleep = ((int(args.time_sleep))*60)*60
-    while True:
-        images = name_images
-        for i in images:
-            with open(i, 'rb') as f:
-                contents = f.read()
-            bot.send_photo(chat_id='-1001870496925', photo=contents)
-            time.sleep(time_sleep)
-        random.shuffle(images)
+    name_photo = args.name_photo
+    if not name_photo:
+        name_photo = random.choice(name_images)
+        with open(name_photo, 'rb') as f:
+            contents = f.read()
+        bot.send_photo(chat_id='-1001870496925', photo=contents)
+    else:
+        path_to_photo = f'images/{name_photo}'
+        with open(path_to_photo, 'rb') as f:
+            contents = f.read()
+        bot.send_photo(chat_id='-1001870496925', photo=contents)
