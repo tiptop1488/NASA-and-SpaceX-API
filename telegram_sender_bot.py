@@ -9,6 +9,7 @@ import argparse
 if __name__ == '__main__':
     load_dotenv()
     token = os.environ['TELEGRAM_TOKEN']
+    chat_id = os.environ['CHAT_ID']
     bot = telegram.Bot(token=token)
     currentDirectory = pathlib.Path('images')
     name_images = []
@@ -22,9 +23,9 @@ if __name__ == '__main__':
         name_photo = random.choice(name_images)
         with open(name_photo, 'rb') as f:
             contents = f.read()
-        bot.send_photo(chat_id='-1001870496925', photo=contents)
+        bot.send_photo(chat_id=chat_id, photo=contents)
     else:
         path_to_photo = f'images/{name_photo}'
         with open(path_to_photo, 'rb') as f:
             contents = f.read()
-        bot.send_photo(chat_id='-1001870496925', photo=contents)
+        bot.send_photo(chat_id=chat_id, photo=contents)
