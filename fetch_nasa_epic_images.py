@@ -16,10 +16,13 @@ def get_nasa_epic_image():
     images_links = []
     for i in description:
         image_name = i['image']
-        payload = {'api_key': api_key}
         date = date.replace('-', '/')
         url = f'https://api.nasa.gov/EPIC/archive/natural/{date}/png/{image_name}.png'
         images_links.append(url)
     images_links = enumerate(images_links)
     for i in images_links:
         additional_scripts.get_image(i[1], f"NASA_EPIK_{i[0]}.{additional_scripts.get_format_file(i[1])}")
+
+
+if __name__ == '__main__':
+    get_nasa_epic_image()

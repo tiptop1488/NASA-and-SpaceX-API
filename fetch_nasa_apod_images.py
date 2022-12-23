@@ -19,3 +19,6 @@ def get_nasa_apod_image():
     for i in image_links:
         additional_scripts.get_image(i[1], f"NASA_{i[0]}.{additional_scripts.get_format_file(i[1])}")
 
+
+if __name__ == '__main__':
+    get_nasa_apod_image()

@@ -37,5 +37,3 @@ def get_format_file(image_link):
     path_to_file = os.path.split(description[2])[1]
     file_format = os.path.splitext(path_to_file)[1][1:]
     return file_format
-
-
