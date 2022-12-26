@@ -9,12 +9,12 @@ import argparse
 if __name__ == '__main__':
     load_dotenv()
     token = os.environ['TELEGRAM_TOKEN']
-    chat_id = os.environ['CHAT_ID']
+    chat_id = os.environ['TG_CHAT_ID']
     bot = telegram.Bot(token=token)
-    currentDirectory = pathlib.Path('images')
+    current_directory = pathlib.Path('images')
     name_images = []
-    for currentFile in currentDirectory.iterdir():
-        name_images.append(currentFile)
+    for current_file in current_directory.iterdir():
+        name_images.append(current_file)
     parser = argparse.ArgumentParser()
     parser.add_argument('--time_sleep')
     args = parser.parse_args()
@@ -24,9 +24,14 @@ if __name__ == '__main__':
         time_sleep = 4 * 60 * 60
     while True:
         images = name_images
-        for i in images:
-            with open(i, 'rb') as f:
+        for image in images:
+            with open(image, 'rb') as f:
                 contents = f.read()
-            bot.send_photo(chat_id=chat_id, photo=contents)
-            time.sleep(time_sleep)
+            try:
+                bot.send_photo(chat_id=chat_id, photo=contents)
+                time.sleep(time_sleep)
+            except telegram.error.NetworkError:
+                time.sleep(10)
         random.shuffle(images)
+
+
