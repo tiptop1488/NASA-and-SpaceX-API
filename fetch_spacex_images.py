@@ -27,7 +27,7 @@ def fetch_spacex_last_launch(launch_id):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--launch_id')
+    parser.add_argument('--launch_id', default='latest')
     args = parser.parse_args()
     launch_id = args.launch_id
     fetch_spacex_last_launch(launch_id)
