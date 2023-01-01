@@ -11,15 +11,15 @@ def get_nasa_epic_image(api_key):
     response = requests.get(url, params=payload)
     response.raise_for_status()
     content = response.json()
-    images_links = []
+    image_links = []
     for description in content:
         image_name = description['image']
         date = date.replace('-', '/')
         url = f'https://api.nasa.gov/EPIC/archive/natural/{date}/png/{image_name}.png'
-        images_links.append(url)
-    images_links = enumerate(images_links)
-    for link in images_links:
-        additional_scripts.get_image(link[1], f"NASA_EPIK_{link[0]}{additional_scripts.get_format_file(link[1])}", api_key)
+        image_links.append(url)
+    for link_number, link in enumerate(image_links):
+        format_file = additional_scripts.get_format_file(link)
+        additional_scripts.get_image(link, f"NASA_EPIC_{link_number}.{format_file}", api_key)
 
 
 if __name__ == '__main__':
