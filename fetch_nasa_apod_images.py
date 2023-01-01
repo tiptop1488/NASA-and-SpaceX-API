@@ -2,11 +2,12 @@ import requests
 from dotenv import load_dotenv
 import os
 import additional_scripts
+import argparse
 
 
-def get_nasa_apod_image(api_key):
+def get_nasa_apod_image(api_key, count=30):
     url = 'https://api.nasa.gov/planetary/apod'
-    payload = {'api_key': api_key, 'count': 30}
+    payload = {'api_key': api_key, 'count': count}
     response = requests.get(url, params=payload)
     response.raise_for_status()
     content = response.json()
@@ -19,4 +20,8 @@ def get_nasa_apod_image(api_key):
 if __name__ == '__main__':
     load_dotenv()
     api_key = os.environ['NASA_API_KEY']
-    get_nasa_apod_image(api_key)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--count')
+    args = parser.parse_args()
+    count = args.count
+    get_nasa_apod_image(api_key, count)
