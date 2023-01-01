@@ -12,9 +12,7 @@ if __name__ == '__main__':
     chat_id = os.environ['TG_CHAT_ID']
     bot = telegram.Bot(token=token)
     current_directory = pathlib.Path('images')
-    name_images = []
-    for current_file in current_directory.iterdir():
-        name_images.append(current_file)
+    name_images = [current_file for current_file in current_directory.iterdir()]
     parser = argparse.ArgumentParser()
     parser.add_argument('--time_sleep')
     args = parser.parse_args()

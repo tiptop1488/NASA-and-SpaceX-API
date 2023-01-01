@@ -10,10 +10,7 @@ def get_nasa_apod_image(api_key):
     response = requests.get(url, params=payload)
     response.raise_for_status()
     content = response.json()
-    image_links = []
-    for description in content:
-        if description['media_type'] == 'image':
-            image_links.append(description['url'])
+    image_links = [description['url'] for description in content if description['media_type'] == 'image']
     for link_number, link in enumerate(image_links):
         format_file = additional_scripts.get_format_file(link)
         additional_scripts.get_image(link, f"NASA_APOD_{link_number}.{format_file}", api_key)
