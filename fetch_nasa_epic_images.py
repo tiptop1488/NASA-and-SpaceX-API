@@ -3,10 +3,14 @@ from dotenv import load_dotenv
 import os
 import additional_scripts
 import datetime
+import argparse
 
 
-def get_nasa_epic_image(api_key):
-    user_date = datetime.datetime(year=2022, month=12, day=13) #'2022-12-13'
+def get_nasa_epic_image(api_key, date):
+    if not date:
+        date = '2022-12-13'
+    year, month, day = date.split('-')
+    user_date = datetime.datetime(year=int(year), month=int(month), day=int(day))
     payload = {'api_key': api_key}
     url = f'https://api.nasa.gov/EPIC/api/natural/date/{user_date}'
     response = requests.get(url, params=payload)
@@ -26,4 +30,8 @@ def get_nasa_epic_image(api_key):
 if __name__ == '__main__':
     load_dotenv()
     api_key = os.environ['NASA_API_KEY']
-    get_nasa_epic_image(api_key)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--date')
+    args = parser.parse_args()
+    date = args.date
+    get_nasa_epic_image(api_key, date)
