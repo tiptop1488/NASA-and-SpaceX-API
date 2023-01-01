@@ -24,18 +24,18 @@ TG_CHAT_ID = 'id канала для публикаций'
 
 ## fetch_nasa_apod_images.py
 
-Скачивает в директорию `images` 30 фотографии космоса от NASA серии APOD. Аргументов на вход не принимает.
+Скачивает в директорию `images` фотографии космоса от NASA серии APOD. Принимает один необязательный аргумент - колличество фотографий. По умолчанию будет скачанно 30 фотографий.
 
 ```
-python3 fetch_nasa_apod_images.py
+python3 fetch_nasa_apod_images.py --count 30
 ```
 
 ## fetch_nasa_epic_images.py
 
-Скачивает в директорию `images` фотографии земли от NASA серии EPIC. Аргументов на вход не принимает.
+Скачивает в директорию `images` фотографии земли от NASA серии EPIC. Принимает один необязательный аргумент - дата создания снимков. По умолчанию будет использована дата - '2022-12-13'.
 
 ```
-python3 fetch_nasa_epic_images.py
+python fetch_nasa_epic_images.py --date 2022-10-13
 ```
 
 ## fetch_spacex_images.py
