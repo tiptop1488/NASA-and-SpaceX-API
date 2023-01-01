@@ -19,7 +19,7 @@ def get_nasa_epic_image(api_key):
         image_links.append(url)
     for link_number, link in enumerate(image_links):
         format_file = additional_scripts.get_format_file(link)
-        additional_scripts.get_image(link, f"NASA_EPIC_{link_number}.{format_file}", api_key)
+        additional_scripts.get_image(link, f"NASA_EPIC_{link_number}.{format_file}", payload)
 
 
 if __name__ == '__main__':
