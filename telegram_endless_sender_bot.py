@@ -17,9 +17,10 @@ if __name__ == '__main__':
     parser.add_argument('--time_sleep')
     args = parser.parse_args()
     if args.time_sleep:
-        time_sleep = ((int(args.time_sleep)) * 60) * 60
+        min_to_sleep = int(args.time_sleep) * 60
+        time_sleep = min_to_sleep * 60
     else:
-        time_sleep = 4 * 60 * 60
+        time_sleep = 14400
     while True:
         images = name_images
         for image in images:
@@ -31,5 +32,3 @@ if __name__ == '__main__':
             except telegram.error.NetworkError:
                 time.sleep(10)
         random.shuffle(images)
-
-
