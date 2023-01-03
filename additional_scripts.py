@@ -6,8 +6,7 @@ import os
 
 def get_image(image_link, image_save_path, payload=None):
     distutils.dir_util.mkpath('images')
-    url = image_link
-    response = requests.get(url, params=payload)
+    response = requests.get(image_link, params=payload)
     response.raise_for_status()
     image_save_path = os.path.join('images', image_save_path)
     with open(image_save_path, 'wb') as file:

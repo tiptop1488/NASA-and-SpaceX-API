@@ -7,10 +7,8 @@ import argparse
 
 
 def get_nasa_epic_image(api_key, date):
-    if not date:
-        date = '2022-12-13'
-    year, month, day = date.split('-')
-    user_date = datetime.datetime(year=int(year), month=int(month), day=int(day))
+    user_date = datetime.datetime.strptime(date, "%Y-%m-%d")
+    print(user_date)
     payload = {'api_key': api_key}
     url = f'https://api.nasa.gov/EPIC/api/natural/date/{user_date}'
     response = requests.get(url, params=payload)
@@ -31,7 +29,7 @@ if __name__ == '__main__':
     load_dotenv()
     api_key = os.environ['NASA_API_KEY']
     parser = argparse.ArgumentParser()
-    parser.add_argument('--date')
+    parser.add_argument('--date', default='2022-12-13')
     args = parser.parse_args()
     date = args.date
     get_nasa_epic_image(api_key, date)

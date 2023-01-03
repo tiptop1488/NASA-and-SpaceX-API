@@ -10,7 +10,6 @@ def fetch_spacex_last_launch(launch_id):
     description = response.json()
     image_links = description['links']['flickr']['original']
     for link_number, link in enumerate(image_links):
-        print(link_number, link)
         format_file = additional_scripts.get_format_file(link)
         additional_scripts.get_image(link, f"SPACEX_{link_number}.{format_file}")
 
